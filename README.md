@@ -46,7 +46,7 @@ npm install
 
 | Comando | Descrição |
 | --- | --- |
-| `npm run dev` | Inicia o servidor de desenvolvimento (padrão: http://localhost:5173) |
+| `npm run dev` | Inicia o servidor de desenvolvimento (padrão: <http://localhost:5173>) |
 | `npm run build` | Checagem de tipos (`tsc -b`) + build de produção em `dist/` |
 | `npm run preview` | Serve localmente o build de produção |
 | `npm run lint` | Apenas a checagem de tipos (`tsc -b --noEmit`) |
