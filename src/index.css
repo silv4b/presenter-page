@@ -1,0 +1,246 @@
+@import "tailwindcss";
+
+@theme {
+  --font-sans: "Inter", ui-sans-serif, system-ui, -apple-system, "Segoe UI",
+    Roboto, sans-serif;
+  --font-mono: "JetBrains Mono", ui-monospace, "SFMono-Regular", Menlo,
+    Consolas, monospace;
+
+  /* Neutros — base da interface (azul-acinzentados) */
+  --color-ink-950: oklch(0.115 0.01 255);
+  --color-ink-900: oklch(0.145 0.013 255);
+  --color-ink-850: oklch(0.168 0.016 255);
+  --color-ink-800: oklch(0.2 0.019 255);
+  --color-ink-700: oklch(0.235 0.022 255);
+  --color-ink-600: oklch(0.281 0.025 255);
+  --color-ink-500: oklch(0.348 0.03 255);
+
+  /* Destaques — azul (baseado no oklch(0.54 0.16 255) do app) */
+  --color-brand-200: oklch(0.947 0.024 255);
+  --color-brand-300: oklch(0.871 0.06 255);
+  --color-brand-400: oklch(0.772 0.1 255);
+  --color-brand-500: oklch(0.712 0.13 255);
+  --color-brand-600: oklch(0.552 0.16 255);
+  --color-accent-400: oklch(0.74 0.115 240);
+  --color-accent-500: oklch(0.62 0.14 240);
+
+  --radius-4xl: 2rem;
+
+  --animate-marquee: marquee 32s linear infinite;
+  --animate-float: float 7s ease-in-out infinite;
+  --animate-pulse-slow: pulseSlow 4s ease-in-out infinite;
+}
+
+@keyframes marquee {
+  from {
+    transform: translateX(0);
+  }
+  to {
+    transform: translateX(-50%);
+  }
+}
+
+@keyframes float {
+  0%,
+  100% {
+    transform: translateY(0);
+  }
+  50% {
+    transform: translateY(-10px);
+  }
+}
+
+@keyframes pulseSlow {
+  0%,
+  100% {
+    opacity: 0.6;
+  }
+  50% {
+    opacity: 1;
+  }
+}
+
+@keyframes riseIn {
+  from {
+    opacity: 0;
+    transform: translateY(18px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@layer base {
+  :root {
+    color-scheme: dark;
+  }
+
+  html {
+    scroll-behavior: smooth;
+    -webkit-text-size-adjust: 100%;
+  }
+
+  body {
+    @apply bg-ink-900 text-zinc-300 antialiased;
+    font-family: var(--font-sans);
+    overflow-x: hidden;
+  }
+
+  section[id] {
+    scroll-margin-top: 5rem;
+  }
+
+  ::selection {
+    background-color: color-mix(in oklab, var(--color-brand-500) 45%, transparent);
+    color: #fff;
+  }
+
+  ::-webkit-scrollbar {
+    width: 10px;
+    height: 10px;
+  }
+  ::-webkit-scrollbar-track {
+    background: var(--color-ink-950);
+  }
+  ::-webkit-scrollbar-thumb {
+    background: var(--color-ink-600);
+    border-radius: 9999px;
+    border: 2px solid var(--color-ink-950);
+  }
+  ::-webkit-scrollbar-thumb:hover {
+    background: var(--color-ink-500);
+  }
+}
+
+@layer components {
+  .container-page {
+    @apply mx-auto w-full max-w-7xl px-5 sm:px-8;
+  }
+
+  .reveal {
+    opacity: 0;
+  }
+
+  .reveal.is-visible {
+    animation: riseIn 0.7s cubic-bezier(0.22, 1, 0.36, 1) forwards;
+  }
+
+  .gradient-text {
+    background: linear-gradient(
+      100deg,
+      var(--color-brand-200),
+      var(--color-brand-400) 55%,
+      var(--color-brand-600)
+    );
+    -webkit-background-clip: text;
+    background-clip: text;
+    color: transparent;
+  }
+
+  .card-glass {
+    @apply rounded-3xl border border-white/8 bg-white/[0.025] backdrop-blur-sm;
+  }
+
+  .glow-ring {
+    box-shadow:
+      0 0 0 1px color-mix(in oklab, var(--color-brand-500) 25%, transparent),
+      0 24px 80px -30px color-mix(in oklab, var(--color-brand-500) 55%, transparent);
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.001ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.001ms !important;
+    scroll-behavior: auto !important;
+  }
+  .reveal {
+    opacity: 1;
+  }
+}
+
+/* ---------------------------------------------------------------------------
+   Theme patterns (grid overlays) driven by variables so they adapt to theme
+--------------------------------------------------------------------------- */
+:root {
+  --grid-line: rgba(120, 165, 230, 0.06);
+  --dot-color: rgba(120, 165, 230, 0.13);
+}
+
+.hero-grid {
+  background-image: linear-gradient(var(--grid-line) 1px, transparent 1px),
+    linear-gradient(90deg, var(--grid-line) 1px, transparent 1px);
+  background-size: 64px 64px;
+}
+
+.slide-dots {
+  background-image: radial-gradient(
+    circle at 1px 1px,
+    var(--dot-color) 1px,
+    transparent 0
+  );
+  background-size: 18px 18px;
+}
+
+/* ---------------------------------------------------------------------------
+   Light theme
+   Tailwind v4 emits a `color-mix(in oklab, var(--color-X) N%, transparent)`
+   branch for every color utility, so re-declaring the theme variables here
+   flips the entire interface (backgrounds, borders, text, gradients, rings).
+   These rules are intentionally unlayered so they beat Tailwind's layers.
+--------------------------------------------------------------------------- */
+[data-theme="light"] {
+  color-scheme: light;
+
+  /* surfaces — also used as text color on inverted (white -> dark) buttons */
+  --color-ink-950: oklch(0.967 0.006 255);
+  --color-ink-900: oklch(0.972 0.006 255);
+  --color-ink-850: oklch(0.946 0.01 255);
+  --color-ink-800: oklch(0.918 0.014 255);
+  --color-ink-700: oklch(0.879 0.018 255);
+  --color-ink-600: oklch(0.836 0.022 255);
+  --color-ink-500: oklch(0.752 0.028 255);
+
+  /* body text */
+  --color-zinc-200: #27272a;
+  --color-zinc-300: #3f3f46;
+  --color-zinc-400: #52525b;
+  --color-zinc-500: #6b6b74;
+
+  /* "white" becomes ink in light mode, keeping buttons high-contrast */
+  --color-white: oklch(0.2 0.022 255);
+
+  /* brand / accent -> dark metallic grays */
+  --color-brand-200: oklch(0.56 0.15 255);
+  --color-brand-300: oklch(0.5 0.16 255);
+  --color-brand-400: oklch(0.44 0.128 255);
+  --color-brand-500: oklch(0.38 0.112 255);
+  --color-brand-600: oklch(0.3 0.1 255);
+  --color-accent-400: oklch(0.52 0.115 250);
+  --color-accent-500: oklch(0.44 0.115 250);
+
+  --grid-line: rgba(23, 58, 102, 0.08);
+  --dot-color: rgba(23, 58, 102, 0.12);
+}
+
+[data-theme="light"] body {
+  transition: background-color 0.25s ease, color 0.25s ease;
+}
+
+[data-theme="light"] .card-glass {
+  border-color: rgba(23, 58, 102, 0.1);
+  background-color: rgba(255, 255, 255, 0.72);
+  box-shadow:
+    0 1px 2px rgba(15, 40, 80, 0.05),
+    0 18px 40px -28px rgba(15, 40, 80, 0.22);
+}
+
+[data-theme="light"] .glow-ring {
+  box-shadow:
+    0 0 0 1px rgba(20, 60, 120, 0.06),
+    0 30px 60px -30px rgba(20, 60, 120, 0.3);
+}
