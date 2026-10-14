@@ -26,7 +26,7 @@ export function HeroMedia() {
       <img
         src={HERO_SHOT}
         alt="Janela de controle do Presenter com um slide, preview do próximo e cronômetro"
-        className="block w-full bg-ink-950"
+        className="block w-full max-w-full bg-ink-950"
         onError={() => setFailed(true)}
         loading="eager"
       />

@@ -58,12 +58,12 @@ export function Gallery() {
         {!active ? (
           <EmptyState />
         ) : (
-          <div className="reveal mt-14 grid gap-6 lg:grid-cols-[minmax(0,1.55fr)_minmax(0,1fr)] lg:items-start lg:gap-8">
+          <div className="reveal mt-14 grid grid-cols-1 gap-6 lg:grid-cols-[minmax(0,1.55fr)_minmax(0,1fr)] lg:items-start lg:gap-8">
             <button
               type="button"
               onClick={() => setLightbox(true)}
               aria-label="Ampliar imagem"
-              className="group relative block w-full cursor-zoom-in text-left"
+              className="group relative block w-full min-w-0 cursor-zoom-in text-left"
             >
               <WindowFrame title={`presenter · ${active.title}`} className="glow-ring">
                 <img

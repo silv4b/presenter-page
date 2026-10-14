@@ -12,17 +12,18 @@ export function Hero() {
         <div className="hero-grid absolute inset-0 opacity-[0.4] [mask-image:radial-gradient(ellipse_at_top,black,transparent_72%)]" />
       </div>
 
-      <div className="container-page grid items-center gap-12 lg:grid-cols-[minmax(0,1fr)_minmax(0,1.05fr)] lg:gap-10">
+      <div className="container-page grid grid-cols-1 items-center gap-10 sm:gap-12 lg:grid-cols-[minmax(0,1fr)_minmax(0,1.05fr)] lg:gap-10">
         <div className="reveal">
-          <span className="inline-flex items-center gap-2 rounded-full border border-white/10 bg-white/[0.03] px-3.5 py-1.5 text-xs font-medium text-zinc-300">
-            <Zap className="h-3.5 w-3.5 text-accent-400" />
-            Grátis e open source · Windows &amp; Linux
+          <span className="inline-flex max-w-full items-center gap-2 rounded-full border border-white/10 bg-white/[0.03] px-3.5 py-1.5 text-xs font-medium text-zinc-300">
+            <Zap className="h-3.5 w-3.5 shrink-0 text-accent-400" />
+            <span>Grátis e open source · Windows &amp; Linux</span>
           </span>
 
-          <h1 className="mt-6 text-4xl font-semibold leading-[1.05] tracking-tight text-white sm:text-5xl lg:text-6xl">
-            Transforme PDFs em
-            <br />
-            <span className="gradient-text">apresentações profissionais.</span>
+          <h1 className="mt-6 text-balance text-3xl font-semibold leading-[1.1] tracking-tight text-white sm:text-5xl lg:text-6xl">
+            Transforme PDFs em{" "}
+            <span className="gradient-text lg:block">
+              apresentações profissionais.
+            </span>
           </h1>
 
           <p className="mt-6 max-w-xl text-base leading-relaxed text-zinc-400 sm:text-lg">
@@ -32,7 +33,7 @@ export function Hero() {
             projeção em tela cheia e anotações ao vivo.
           </p>
 
-          <div className="mt-8 flex flex-wrap items-center gap-3">
+          <div className="mt-7 flex flex-wrap items-center gap-3 sm:mt-8">
             <a
               href="#downloads"
               className="group inline-flex items-center gap-2 rounded-full bg-white px-6 py-3.5 text-sm font-semibold text-ink-900 transition-transform hover:scale-[1.03]"
@@ -51,14 +52,14 @@ export function Hero() {
             </a>
           </div>
 
-          <dl className="mt-10 grid max-w-lg grid-cols-3 gap-6 border-t border-white/8 pt-6">
+          <dl className="mt-9 grid max-w-lg grid-cols-3 gap-4 border-t border-white/8 pt-6 sm:mt-10 sm:gap-6">
             <Stat value="4" label="ferramentas de anotação ao vivo" />
             <Stat value="∞" label="monitores em simultâneo" />
             <Stat value="100%" label="offline, sem contas" />
           </dl>
         </div>
 
-        <div className="reveal lg:pl-4">
+        <div className="reveal min-w-0 lg:pl-4">
           <HeroMedia />
         </div>
       </div>
