@@ -79,7 +79,7 @@ export function Navbar() {
       </nav>
 
       {open && (
-        <div className="border-t border-white/8 bg-ink-900/95 backdrop-blur-xl lg:hidden">
+        <div className="animate-menu border-t border-white/8 bg-ink-900/95 backdrop-blur-xl lg:hidden">
           <div className="container-page flex flex-col gap-1 py-4">
             {navLinks.map((link) => (
               <a
